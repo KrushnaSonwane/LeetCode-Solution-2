@@ -20,9 +20,7 @@ class UnionFind:
             self.rank[u] += 1
         
     def check(self, u, v):
-        self.find(u)
-        self.find(v)
-        return self.parent[u] == self.parent[v]
+        return self.find(v) == self.find(u)
 
 class Solution:
     def findAllPeople(self, n: int, A: List[List[int]], firstPerson: int) -> List[int]:
