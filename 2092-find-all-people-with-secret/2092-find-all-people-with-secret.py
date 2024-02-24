@@ -1,12 +1,12 @@
 class UnionFind:
     def __init__(self, n):
-        self.parent = [i for i in range(n)]
-        self.rank = [0 for _ in range(n)]
+        self.parent = [i for i in range(n+1)]
+        self.rank = [0 for _ in range(n+1)]
     
-    def find(self, i):
-        if i != self.parent[i]:
-            self.parent[i] = self.find(self.parent[i])
-        return self.parent[i]
+    def find(self, node):
+        if node == self.parent[node]: return node
+        self.parent[node] = self.find(self.parent[node])
+        return self.parent[node]
     
     def union(self, u, v):
         u, v = self.find(u), self.find(v)
@@ -18,9 +18,9 @@ class UnionFind:
         else:
             self.parent[v] = u
             self.rank[u] += 1
-        
+    
     def check(self, u, v):
-        return self.find(v) == self.find(u)
+        return self.find(u) == self.find(v)
 
 class Solution:
     def findAllPeople(self, n: int, A: List[List[int]], firstPerson: int) -> List[int]:
