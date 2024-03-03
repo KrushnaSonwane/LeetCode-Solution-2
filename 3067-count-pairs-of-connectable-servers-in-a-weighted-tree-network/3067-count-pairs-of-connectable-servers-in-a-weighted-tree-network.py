@@ -15,7 +15,6 @@ class Solution:
             adj[a].append([b, c])
             adj[b].append([a, c])
         res = []
-        A = []
         for i in range(len(edges)+1):
             ans, sum_ = 0, 0
             for child, c in adj[i]:
