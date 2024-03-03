@@ -17,19 +17,11 @@ class Solution:
         res = []
         A = []
         for i in range(len(edges)+1):
-            A = []
-            if len(adj[i]) == 1:
-                res.append(0)
-            else:
-                for child, c in adj[i]:
-                    self.count = 0
-                    dfs(child, c, 0, i)
-                    A.append(self.count)
-                ans, sum_ = 0, 0
-                for num in A:
-                    if num == 0: continue
-                    ans += num * sum_
-                    sum_ += num
-                res.append(ans)
-            # print(A)
+            ans, sum_ = 0, 0
+            for child, c in adj[i]:
+                self.count = 0
+                dfs(child, c, 0, i)
+                ans += self.count * sum_
+                sum_ += self.count
+            res.append(ans)
         return res
