@@ -8,7 +8,5 @@ class Solution:
             x, y = heappop(A), heappop(A)
             if k > x:
                 res += 1
-            else:
-                break
-            heappush(A, min(x, y) * 2 + max(x, y))
+                heappush(A, min(x, y) * 2 + max(x, y))
         return res
