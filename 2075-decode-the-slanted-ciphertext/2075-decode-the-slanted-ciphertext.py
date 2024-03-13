@@ -1,6 +1,5 @@
 class Solution:
     def decodeCiphertext(self, S: str, rows: int) -> str:
-        if not S: return ''
         A, i = [], 0
         for _ in range(rows):
             t = []
