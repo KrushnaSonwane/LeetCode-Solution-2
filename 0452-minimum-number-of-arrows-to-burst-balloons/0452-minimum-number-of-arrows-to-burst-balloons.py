@@ -3,8 +3,7 @@ class Solution:
         res, min_ = 0, -inf
         for l, r in sorted(A):
             if l > min_:
-                min_ = r
-                res += 1
+                res, min_ = res + 1, r
             else:
                 min_ = min(min_, r)
         return res
