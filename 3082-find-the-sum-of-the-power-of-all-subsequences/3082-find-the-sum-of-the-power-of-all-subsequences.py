@@ -5,6 +5,5 @@ class Solution:
         def dfs(i, sum_, size):
             if k == sum_: return 2 ** size
             if sum_ > k or i == len(A): return 0
-            res = dfs(i+1, sum_, size)
-            return (res + dfs(i+1, sum_+A[i], size-1)) % MOD
+            return (dfs(i+1, sum_, size) + dfs(i+1, sum_+A[i], size-1)) % MOD
         return dfs(0, 0, n)
