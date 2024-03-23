@@ -8,27 +8,25 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        value = []
-        node = head
-        
-        while node:
-            value.append(node.val)
-            node = node.next
-        
-        left = 0
-        right = len(value) - 1
-        
-        node = head
-        i = 0
-        
-        while node:
-            if i % 2 == 0:
-                node.val = value[left]
-                left += 1
-            else:
-                node.val = value[right]
-                right -= 1
-            i += 1
-            node = node.next
-            
+        slow, fast = head, head.next
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        new = slow.next
+        slow.next = None
+        prev, node = None, None
+        while new:
+            nxt = new.next
+            new.next = prev
+            prev = new
+            new = nxt
+        res = head
+        while res and prev:
+            nxt1 = res.next
+            nxt2 = prev.next
+            prev.next = None
+            res.next = prev
+            res.next.next = nxt1
+            prev = nxt2
+            res = res.next.next
         return head
