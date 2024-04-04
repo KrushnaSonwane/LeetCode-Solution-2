@@ -1,9 +1,5 @@
-class Solution(object):
-    def maxDepth(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
+class Solution:
+    def maxDepth(self, s: str) -> int:
         stack = []
         count = 0
         ans = 0
