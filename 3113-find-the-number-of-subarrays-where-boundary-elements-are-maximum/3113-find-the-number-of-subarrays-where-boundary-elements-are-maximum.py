@@ -34,18 +34,12 @@ class Solution:
             hashT[num].append(i)
         res = 0
         for num in hashT:
-            last = -1
-            count = 0
+            last, count = hashT[num][0], 0
             for i in hashT[num]:
-                if last == -1:
-                    last = i
                 max_ = obj.getRange(0, len(nums)-1, last, i)
-                if max_ == num:
-                    last = i
-                    count += 1
-                else:
-                    count = 1
-                last = i
+                if max_ != num:
+                    count = 0
+                count, last = count+1, i
                 res += count
         return res
                 
