@@ -1,5 +1,5 @@
-class Solution(object):
-    def validPath(self, n, edges, start, end):
+class Solution:
+    def validPath(self, n: int, edges: List[List[int]], start: int, end: int) -> bool:
         neighbors = defaultdict(list)
         for n1, n2 in edges:
             neighbors[n1].append(n2)
