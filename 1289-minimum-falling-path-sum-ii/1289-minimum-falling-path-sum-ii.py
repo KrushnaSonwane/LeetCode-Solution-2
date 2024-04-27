@@ -1,11 +1,18 @@
 class Solution:
     def minFallingPathSum(self, A: List[List[int]]) -> int:
-        @cache
-        def dfs(i, last):
-            if i == len(A): return 0
-            res = inf
-            for j in range(len(A[i])):
-                if last == j: continue
-                res = min(res, dfs(i+1, j) + A[i][j])
+
+        def getMin(A):
+            res, min_ = [], inf
+            for num in A:
+                res.append(min_)
+                min_ = min(min_, num)
             return res
-        return dfs(0, -1)
+
+        last = A[0]
+        for i in range(1, len(A)):
+            left, right = getMin(last), getMin(last[::-1])[::-1]
+            dp = []
+            for j in range(len(A[i])):
+                dp.append(min(right[j], left[j]) + A[i][j])
+            last = dp
+        return min(last)
