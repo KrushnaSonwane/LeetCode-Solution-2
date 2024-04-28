@@ -15,6 +15,7 @@ class Solution:
                     count[key] += 1
                 i += 1
                 j += 1  
+                
         res = inf
         for key in C:
             if count[key] >= len(B):
