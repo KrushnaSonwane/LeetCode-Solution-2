@@ -1,20 +1,22 @@
 class Solution:
-    def minimumAddedInteger(self, nums1: List[int], nums2: List[int]) -> int:
-        nums1.sort()
-        nums2.sort()
-        @cache
-        def dfs(i, remove, diff, taken):
-            # print(i, remove, diff, taken)
-            if remove >= 3: return inf
-            if taken == len(nums2): return diff
-            if i == len(nums1): return diff
-            res = dfs(i+1, remove + 1, diff, taken)
-            if diff == inf:
-                res = min(res, dfs(i+1, remove, nums2[i-remove] - nums1[i], taken+1))
-            else:
-                if diff == nums2[i-remove] - nums1[i]:
-                    res = min(res, dfs(i+1, remove, diff, taken+1))
-                else:
-                    res = min(res, dfs(i+1, remove+1, diff, taken))
-            return res
-        return dfs(0, 0, inf, 0)
+    def minimumAddedInteger(self, A: List[int], B: List[int]) -> int:
+        A.sort()
+        B.sort()
+        C, count = set(), Counter()
+        for i in range(3):
+            C.add(B[0]-A[i])
+        
+        for key in C:
+            i, j = 0, 0
+            while i < len(A) and j < len(B):
+                while i < len(A) and B[j]-A[i] != key:
+                    i += 1
+                if i < len(A) and B[j]-A[i] == key:
+                    count[key] += 1
+                i += 1
+                j += 1  
+        res = inf
+        for key in C:
+            if count[key] >= len(B):
+                res = min(res, key)
+        return res
