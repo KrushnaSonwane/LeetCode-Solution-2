@@ -1,7 +1,7 @@
 class Solution:
     def minOperations(self, nums: List[int], k: int) -> int:
         res = 0
-        for i in range(25):
+        for i in range(30):
             xor = 0
             for num in nums:
                 xor = xor ^ ((num >> i) & 1)
