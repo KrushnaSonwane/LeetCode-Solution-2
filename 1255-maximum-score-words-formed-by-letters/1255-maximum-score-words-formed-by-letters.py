@@ -1,35 +1,28 @@
 class Solution:
     def maxScoreWords(self, words: List[str], letters: List[str], score: List[int]) -> int:
-        W = len(words)
-        # Count how many times each letter occurs
-        freq = [0 for i in range(26)]
-        for c in letters:
-            freq[ord(c) - 97] += 1
-
-        # Calculate score of subset
-        def subset_score(subset_letters, score, freq):
-            total_score = 0
-            for c in range(26):
-                total_score += subset_letters[c] * score[c]
-                # Check if we have enough of each letter to build this subset of words
-                if subset_letters[c] > freq[c]:
-                    return 0
-            return total_score
-
-        max_score = 0
-        # Iterate over every subset of words
-        subset_letters = {}
-        for mask in range(1 << W):
-            # Reset the subset_letters map
-            subset_letters = [0 for i in range(26)]
-            # Find words in this subset
-            for i in range(W):
-                if (mask & (1 << i)) > 0:
-                    # Count the letters in this word
-                    L = len(words[i])
-                    for j in range(L):
-                        subset_letters[ord(words[i][j]) - 97] += 1
-            # Calculate score of subset
-            max_score = max(max_score, subset_score(subset_letters, score, freq))
-        # Return max_score as the result
-        return max_score
+        res = []
+        def dfs(i, A):
+            if i == len(words):
+                res.append(A.copy())
+                return
+            dfs(i+1, A)
+            A.append(i)
+            B = [num for num in A]
+            dfs(i+1, B.copy())
+            A.pop()
+        dfs(0, [])
+        ans, hashT = 0, Counter(letters)
+        for li in res:
+            A = Counter()
+            sum_ = 0
+            for i in li:
+                for ch in words[i]:
+                    A[ch] += 1
+            for ch in A:
+                if hashT[ch] >= A[ch]:
+                    sum_ += score[ord(ch)-97] * A[ch]
+                else:
+                    break
+            else:
+                ans = max(ans, sum_)
+        return ans
