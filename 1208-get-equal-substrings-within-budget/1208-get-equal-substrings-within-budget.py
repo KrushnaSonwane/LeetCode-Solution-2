@@ -1,7 +1,6 @@
 class Solution:
     def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
-        res, sum_ = 0, 0
-        i, j = 0, 0
+        res = sum_ = i = j = 0
         while j < len(s):
             sum_ += abs(ord(s[j])-ord(t[j]))
             while sum_ > maxCost:
