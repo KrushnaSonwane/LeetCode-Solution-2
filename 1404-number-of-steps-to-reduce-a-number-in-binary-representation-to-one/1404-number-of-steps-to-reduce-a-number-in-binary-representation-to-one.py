@@ -10,9 +10,8 @@ class Solution:
                     A = ['1'] + ['0' for _ in A]
                 else:
                     A[i] = '1'
-                    i += 1
-                    while i < len(A):
-                        A[i] = '0'
+                    while i+1 < len(A):
+                        A[i+1] = '0'
                         i += 1
             else:
                 A.pop()
