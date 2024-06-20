@@ -1,10 +1,11 @@
 class Solution:
     def maxDistance(self, A: List[int], m: int) -> int:
         A.sort()
+        
         def check(k):
             count, last = 1, A[0]
             for num in A:
-                if abs(num - last) >= k:
+                if num - last >= k:
                     last = num
                     count += 1
             return count >= m
