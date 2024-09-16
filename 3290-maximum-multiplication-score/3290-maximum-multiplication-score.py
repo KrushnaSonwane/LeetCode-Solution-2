@@ -9,7 +9,7 @@ class Solution:
             if indexa == NA:
                 return 0
             if indexb == NB:
-                return -INF
+                return -inf
             
             best = go(indexa, indexb + 1)
             best = max(best, go(indexa + 1, indexb + 1) + a[indexa] * b[indexb])
