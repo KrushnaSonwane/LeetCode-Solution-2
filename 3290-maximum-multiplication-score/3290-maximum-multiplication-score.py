@@ -2,7 +2,7 @@ class Solution:
     def maxScore(self, a: List[int], b: List[int]) -> int:
         NA = len(a)
         NB = len(b)
-        INF = 10 ** 20
+        INF = inf
         
         @cache
         def go(indexa, indexb):
